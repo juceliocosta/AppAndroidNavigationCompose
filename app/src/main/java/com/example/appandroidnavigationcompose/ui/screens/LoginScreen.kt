@@ -69,7 +69,6 @@ fun StatelessEntry(
 
 @Composable
 fun LoginScreen(
-    modifier: Modifier = Modifier,
     navController: NavController
 ) {
     var usuario by remember { mutableStateOf("") }
@@ -85,7 +84,7 @@ fun LoginScreen(
             onUserChange = {newUser -> usuario = newUser},
             onPassChange = {newPass -> senha = newPass},
             onEntryClick = {
-                navController.navigate(Screen.ProjectList.route)
+                navController.navigate(Screen.Profile.route)
             }
         )
     }

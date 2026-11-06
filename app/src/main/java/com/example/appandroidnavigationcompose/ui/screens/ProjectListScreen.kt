@@ -1,8 +1,12 @@
 package com.example.appandroidnavigationcompose.ui.screens
 
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 
 data class Project(
@@ -23,7 +27,9 @@ val sampleProjects = listOf(
 
 @Composable
 fun ProjectListScreen(navController: NavController){
-    LazyColumn(){
+    LazyColumn(
+        modifier = Modifier.fillMaxSize().padding(all = 28.dp)
+    ){
         items(
             items = sampleProjects,
             key = {project -> project.id}
