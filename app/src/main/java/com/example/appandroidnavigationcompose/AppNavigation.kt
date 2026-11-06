@@ -6,6 +6,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.example.appandroidnavigationcompose.ui.screens.LoginScreen
+import com.example.appandroidnavigationcompose.ui.screens.ProjectDetailScreen
+import com.example.appandroidnavigationcompose.ui.screens.ProjectListScreen
 
 sealed class Screen(val route: String) {
     object Profile : Screen("profile")
