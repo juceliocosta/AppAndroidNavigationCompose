@@ -1,4 +1,4 @@
-package com.example.appandroidnavigationcompose
+package com.example.appandroidnavigationcompose.ui.screens
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize

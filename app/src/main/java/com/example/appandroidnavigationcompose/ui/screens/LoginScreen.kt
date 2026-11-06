@@ -1,4 +1,4 @@
-package com.example.appandroidnavigationcompose
+package com.example.appandroidnavigationcompose.ui.screens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -22,6 +22,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.example.appandroidnavigationcompose.R
+import com.example.appandroidnavigationcompose.Screen
 
 @Composable
 fun TextField(
