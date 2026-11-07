@@ -12,6 +12,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.example.appandroidnavigationcompose.database.entities.Project
 
 @Composable
 fun ProjectCard(project: Project, navController: NavController){
@@ -22,7 +23,7 @@ fun ProjectCard(project: Project, navController: NavController){
 
         Column(modifier = Modifier.padding(16.dp)) {
             Text(text = project.name, fontWeight = FontWeight.Bold)
-            Text(text = project.description, color = Color.Gray)
+            Text(text = project.description ?: "", color = Color.Gray)
         }
     }
 }

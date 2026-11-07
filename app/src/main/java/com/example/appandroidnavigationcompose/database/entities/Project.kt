@@ -11,6 +11,6 @@ data class Project(
     @ColumnInfo(name = "project_name")
     val name: String,
     @ColumnInfo(name = "project_description")
-    val description: String,
-    val language: String
+    val description: String? = null,
+    val language: String? = null
 )
