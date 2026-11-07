@@ -21,4 +21,8 @@ class ProjectRepository(
     suspend fun getLocalProjects(): List<Project> {
         return projectDao.getAllProjects()
     }
+
+    suspend fun getProjectById(id: Int): Project? {
+        return projectDao.getProjectById(id)
+    }
 }
