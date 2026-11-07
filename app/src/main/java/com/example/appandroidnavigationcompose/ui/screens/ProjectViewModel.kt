@@ -3,55 +3,36 @@ package com.example.appandroidnavigationcompose.ui.screens
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.example.appandroidnavigationcompose.database.dao.ProjectDao
 import com.example.appandroidnavigationcompose.database.entities.Project
-import com.example.appandroidnavigationcompose.network.RetrofitInstance
+import com.example.appandroidnavigationcompose.database.repositories.ProjectRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 class ProjectViewModel(
-    private val projectDao: ProjectDao,
+    private val repository: ProjectRepository,
 ) : ViewModel() {
     private val _projects = MutableStateFlow<List<Project>>(emptyList())
     val projects: StateFlow<List<Project>> = _projects.asStateFlow()
 
-    init { fetchAndSaveProjects() }
+    init { fetchProjects() }
 
-    fun fetchAndSaveProjects() {
-        viewModelScope.launch {
-            // 1. Carrega do banco de dados local primeiro
-            val localProjects = withContext(Dispatchers.IO) {
-                projectDao.getAllProjects()
-            }
-            _projects.value = localProjects
-
-            // 2. Busca da API e atualiza o banco local
+    private fun fetchProjects() {
+        viewModelScope.launch(Dispatchers.IO) {
             try {
-                val apiProjects = withContext(Dispatchers.IO){
-                    RetrofitInstance.api.getAllProjects()
-                }
-                withContext(Dispatchers.IO) {
-                    projectDao.insertAll(apiProjects)
-                }
-
-                // 3. Atualiza a tela com os dados mais recentes do banco
-                _projects.value = withContext(Dispatchers.IO) {
-                    projectDao.getAllProjects()
-                }
-            } catch (e: Exception) {
+                _projects.value = repository.getAllProjects()
+            }catch (e: Exception) {
                 e.printStackTrace()
             }
         }
     }
 
-    class Factory(private val projectDao: ProjectDao) : ViewModelProvider.Factory {
+    class Factory(private val repository: ProjectRepository) : ViewModelProvider.Factory {
         @Suppress("UNCHECKED_CAST")
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
-            return ProjectViewModel(projectDao) as T
+            return ProjectViewModel(repository) as T
         }
     }
 }
